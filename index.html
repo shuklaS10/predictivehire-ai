@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow">Capstone AI Screening</p>
+                <h1>AI Resume Analyzer</h1>
+                <p>Upload a resume, choose a target role, paste a job description, and get a clean skill-match report with a technical learning roadmap.</p>
+
+                <div class="stats-row">
+                    <div>
+                        <strong>PDF</strong>
+                        <span>Resume parsing</span>
+                    </div>
+                    <div>
+                        <strong>DOCX</strong>
+                        <span>Document support</span>
+                    </div>
+                    <div>
+                        <strong>AI</strong>
+                        <span>Skill matching</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-card" aria-hidden="true">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <div class="processor">
+                    <div class="scan"></div>
+                    <div class="processor-core">AI</div>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <form class="form-card" action="{{ url_for('analyze') }}" method="post" enctype="multipart/form-data">
+                <div class="section-title">
+                    <p class="eyebrow">Resume intelligence</p>
+                    <h2>Analyze candidate fit</h2>
+                </div>
+
+                {% if error %}
+                <p class="error-message">{{ error }}</p>
+                {% endif %}
+
+                <label class="upload-box">
+                    <input id="resume" type="file" name="resume" accept=".pdf,.docx,.txt" required>
+                    <span class="upload-mark">+</span>
+                    <span>
+                        <strong>Upload Resume (PDF / DOCX / TXT)</strong>
+                        <small id="file-name">Choose a resume file</small>
+                    </span>
+                </label>
+
+                <div class="field">
+                    <label for="job_role">Select Job Role</label>
+                    <select id="job_role" name="job_role" required>
+                        {% for role in roles %}
+                        <option value="{{ role }}">{{ role }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="job_description">Job Description (Paste Here)</label>
+                    <textarea id="job_description" name="job_description" rows="7" required placeholder="Paste the job description here..."></textarea>
+                </div>
+
+                <button type="submit">Analyze Resume</button>
+            </form>
+
+            <aside class="pipeline-card">
+                <div class="section-title">
+                    <p class="eyebrow">Technical workflow</p>
+                    <h2>AI pipeline</h2>
+                </div>
+
+                <div class="pipeline">
+                    <div class="step active"><b>01</b><span>Read resume text</span></div>
+                    <div class="step"><b>02</b><span>Extract role skills</span></div>
+                    <div class="step"><b>03</b><span>Score match quality</span></div>
+                    <div class="step"><b>04</b><span>Show learning path</span></div>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
