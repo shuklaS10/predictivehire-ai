@@ -1,0 +1,482 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #08111f 0%, #132842 50%, #090f1d 100%);
+    color: #edf7ff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body::before {
+    position: fixed;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+}
+
+.page-shell {
+    position: relative;
+    width: 92%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 34px 0 56px;
+}
+
+.hero,
+.content-grid,
+.result-hero,
+.results-grid {
+    animation: rise-in 0.65s ease both;
+}
+
+.hero,
+.result-hero,
+.form-card,
+.pipeline-card,
+.score-card,
+.skills-card {
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 24px;
+    background: rgba(13, 24, 43, 0.9);
+    box-shadow: 0 26px 80px rgba(0, 0, 0, 0.32);
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 30px;
+    min-height: 350px;
+    padding: 42px;
+    overflow: hidden;
+}
+
+.hero-copy {
+    align-self: center;
+}
+
+.eyebrow {
+    margin: 0 0 10px;
+    color: #24d3ee;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+    margin-top: 0;
+}
+
+h1 {
+    max-width: 650px;
+    margin-bottom: 18px;
+    font-size: 72px;
+    line-height: 0.96;
+}
+
+h2 {
+    margin-bottom: 0;
+    font-size: 22px;
+}
+
+p {
+    color: #9fb4c8;
+    line-height: 1.7;
+}
+
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 560px;
+    margin-top: 34px;
+}
+
+.stats-row div,
+.step {
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 16px;
+}
+
+.stats-row strong {
+    display: block;
+    font-size: 24px;
+}
+
+.stats-row span,
+.step span,
+small {
+    color: #9fb4c8;
+}
+
+.ai-card {
+    position: relative;
+    display: grid;
+    min-height: 280px;
+    place-items: center;
+}
+
+.orbit {
+    position: absolute;
+    border: 1px dashed rgba(36, 211, 238, 0.35);
+    border-radius: 999px;
+    animation: spin 18s linear infinite;
+}
+
+.orbit-one {
+    width: 330px;
+    height: 330px;
+}
+
+.orbit-two {
+    width: 230px;
+    height: 230px;
+    animation-direction: reverse;
+}
+
+.processor {
+    position: relative;
+    display: grid;
+    width: 300px;
+    max-width: 100%;
+    aspect-ratio: 1;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid rgba(36, 211, 238, 0.36);
+    border-radius: 24px;
+    background: linear-gradient(145deg, rgba(36, 211, 238, 0.18), rgba(16, 27, 47, 0.9));
+}
+
+.processor-core {
+    display: grid;
+    width: 104px;
+    height: 104px;
+    place-items: center;
+    border-radius: 24px;
+    background: #07101d;
+    color: #24d3ee;
+    font-size: 38px;
+    font-weight: 800;
+    box-shadow: 0 0 34px rgba(36, 211, 238, 0.35);
+}
+
+.processor span {
+    width: 72%;
+    height: 9px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.scan {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #24d3ee, transparent);
+    animation: scan 2.8s ease-in-out infinite;
+}
+
+.content-grid,
+.results-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 0.65fr;
+    gap: 22px;
+    margin-top: 24px;
+}
+
+.form-card,
+.pipeline-card,
+.score-card,
+.skills-card {
+    padding: 28px;
+}
+
+.section-title {
+    margin-bottom: 22px;
+}
+
+.error-message {
+    border: 1px solid rgba(251, 113, 133, 0.35);
+    border-radius: 14px;
+    background: rgba(251, 113, 133, 0.12);
+    color: #fecdd3;
+    padding: 12px 14px;
+}
+
+.upload-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 112px;
+    padding: 18px;
+    border: 1px dashed rgba(36, 211, 238, 0.52);
+    border-radius: 18px;
+    background: rgba(36, 211, 238, 0.08);
+    cursor: pointer;
+}
+
+.upload-box input {
+    max-width: 230px;
+    color: #9fb4c8;
+}
+
+.upload-mark {
+    display: grid;
+    flex: 0 0 52px;
+    width: 52px;
+    height: 52px;
+    place-items: center;
+    border-radius: 15px;
+    background: #24d3ee;
+    color: #07101d;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.field {
+    margin-top: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 800;
+}
+
+select,
+textarea {
+    width: 100%;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.96);
+    color: #07101d;
+    font: inherit;
+}
+
+select {
+    min-height: 52px;
+    padding: 0 14px;
+}
+
+textarea {
+    min-height: 160px;
+    padding: 16px;
+    resize: vertical;
+}
+
+button,
+.back-link,
+.skill-list a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    border-radius: 999px;
+    border: 0;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+button {
+    width: 100%;
+    margin-top: 22px;
+    background: linear-gradient(90deg, #24d3ee, #4ade80);
+    color: #06111f;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.pipeline {
+    display: grid;
+    gap: 14px;
+}
+
+.step {
+    display: flex;
+    gap: 14px;
+}
+
+.step b {
+    color: #24d3ee;
+}
+
+.step.active {
+    border-color: rgba(36, 211, 238, 0.48);
+    background: rgba(36, 211, 238, 0.1);
+}
+
+.result-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 34px;
+}
+
+.result-hero h1 {
+    font-size: 54px;
+}
+
+.back-link {
+    flex: 0 0 auto;
+    padding: 0 18px;
+    border: 1px solid rgba(36, 211, 238, 0.35);
+    color: #edf7ff;
+    background: rgba(36, 211, 238, 0.1);
+}
+
+.score-card {
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+
+.score-ring {
+    display: grid;
+    width: 210px;
+    aspect-ratio: 1;
+    margin-bottom: 20px;
+    place-items: center;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at center, #101b2f 0 58%, transparent 59%),
+        conic-gradient(#4ade80 var(--score), rgba(255, 255, 255, 0.14) 0);
+}
+
+.score-ring span,
+.mini-score {
+    color: #edf7ff;
+    font-size: 46px;
+    font-weight: 800;
+}
+
+.mini-score {
+    margin-bottom: 16px;
+    color: #24d3ee;
+}
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.skill-list li {
+    border-radius: 999px;
+    font-weight: 800;
+}
+
+.good li {
+    padding: 12px 16px;
+    background: rgba(74, 222, 128, 0.13);
+    color: #bbf7d0;
+}
+
+.bad {
+    display: grid;
+}
+
+.bad li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 12px;
+    padding: 9px 9px 9px 16px;
+    background: rgba(251, 113, 133, 0.13);
+    color: #fecdd3;
+}
+
+.skill-list a {
+    min-height: 34px;
+    padding: 0 14px;
+    color: #07101d;
+    background: #facc15;
+}
+
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes scan {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    20%,
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(300px);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 860px) {
+    .hero,
+    .content-grid,
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-hero {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 560px) {
+    .page-shell {
+        width: calc(100% - 20px);
+        padding-top: 18px;
+    }
+
+    .hero,
+    .result-hero,
+    .form-card,
+    .pipeline-card,
+    .score-card,
+    .skills-card {
+        border-radius: 18px;
+        padding: 20px;
+    }
+
+    .stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    .upload-box {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
