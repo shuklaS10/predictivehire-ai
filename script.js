@@ -1,64 +1,23 @@
-function learnMore() {
-  alert("This AI-powered tool analyzes resumes, extracts skills, and compares them with job descriptions for smart insights.");
-}
+document.addEventListener("DOMContentLoaded", function () {
+    const resumeInput = document.getElementById("resume");
+    const fileName = document.getElementById("file-name");
+    const form = document.querySelector(".form-card");
+    const submitButton = document.querySelector("button[type='submit']");
 
-// Handle form submission with AJAX
-document.querySelector("form").addEventListener("submit", async function(e) {
-  e.preventDefault();
-  const formData = new FormData(this);
+    if (resumeInput && fileName) {
+        resumeInput.addEventListener("change", function () {
+            if (resumeInput.files.length > 0) {
+                fileName.textContent = resumeInput.files[0].name;
+            } else {
+                fileName.textContent = "Choose a resume file";
+            }
+        });
+    }
 
-  const response = await fetch("/analyze", {
-    method: "POST",
-    body: formData
-  });
-
-  const data = await response.json();
-  renderCharts(data);
+    if (form && submitButton) {
+        form.addEventListener("submit", function () {
+            submitButton.textContent = "Analyzing Resume...";
+            submitButton.disabled = true;
+        });
+    }
 });
-
-// Render charts
-function renderCharts(data) {
-  // Score chart
-  new Chart(document.getElementById("scoreChart"), {
-    type: "doughnut",
-    data: {
-      labels: ["Score", "Remaining"],
-      datasets: [{
-        data: [data.score, 100 - data.score],
-        backgroundColor: ["#ff6a00", "#ddd"]
-      }]
-    },
-    options: {
-      plugins: {
-        title: {
-          display: true,
-          text: "Resume Score"
-        }
-      }
-    }
-  });
-
-  // Job match chart
-  new Chart(document.getElementById("matchChart"), {
-    type: "bar",
-    data: {
-      labels: ["Job Match %"],
-      datasets: [{
-        label: "Match",
-        data: [data.similarity],
-        backgroundColor: "#2575fc"
-      }]
-    },
-    options: {
-      plugins: {
-        title: {
-          display: true,
-          text: "Resume-Job Match"
-        }
-      },
-      scales: {
-        y: { beginAtZero: true, max: 100 }
-      }
-    }
-  });
-}
