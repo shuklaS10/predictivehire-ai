@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analysis Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="result-hero">
+            <div>
+                <p class="eyebrow">Resume Analysis</p>
+                <h1>{{ role }} match report</h1>
+                <p>Your resume was scanned against the selected technical skill profile.</p>
+            </div>
+            <a class="back-link" href="{{ url_for('home') }}">Analyze another resume</a>
+        </section>
+
+        <section class="results-grid">
+            <article class="score-card">
+                <div class="score-ring" style="--score: {{ score }}%;">
+                    <span>{{ score }}%</span>
+                </div>
+                <h2>Resume Match Score</h2>
+                <p>Based on required skills found inside your resume.</p>
+            </article>
+
+            <article class="score-card compact">
+                <div class="mini-score">{{ job_match_score }}%</div>
+                <h2>Job Description Focus</h2>
+                <p>How strongly your resume covers skills mentioned in the pasted job description.</p>
+            </article>
+
+            <article class="skills-card">
+                <div class="section-title">
+                    <p class="eyebrow">Strengths</p>
+                    <h2>Skills You Have</h2>
+                </div>
+
+                <ul class="skill-list good">
+                    {% for skill in candidate_skills %}
+                    <li>{{ skill }}</li>
+                    {% else %}
+                    <li>No matching skills found yet</li>
+                    {% endfor %}
+                </ul>
+            </article>
+
+            <article class="skills-card">
+                <div class="section-title">
+                    <p class="eyebrow">Next focus</p>
+                    <h2>Skills to Improve</h2>
+                </div>
+
+                <ul class="skill-list bad">
+                    {% for skill in missing_skills %}
+                    <li>
+                        <span>{{ skill }}</span>
+                        {% if skill in links %}
+                        <a href="{{ links[skill] }}" target="_blank">Learn</a>
+                        {% endif %}
+                    </li>
+                    {% else %}
+                    <li><span>Great coverage for this role</span></li>
+                    {% endfor %}
+                </ul>
+            </article>
+
+            <article class="skills-card">
+                <div class="section-title">
+                    <p class="eyebrow">Roadmap</p>
+                    <h2>Recommended path</h2>
+                </div>
+                <a class="back-link" href="{{ roadmap }}" target="_blank">Open roadmap</a>
+            </article>
+        </section>
+    </main>
+</body>
+</html>
